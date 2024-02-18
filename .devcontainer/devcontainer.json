@@ -1,0 +1,43 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+	"name": "say",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "mcr.microsoft.com/devcontainers/go:1-1.22-bookworm",
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {},
+		"ghcr.io/guiyomh/features/golangci-lint:0": {},
+		"ghcr.io/jungaretti/features/make:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "go install golang.org/x/pkgsite/cmd/pkgsite@latest",
+
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"bierner.markdown-mermaid",
+				"golang.go",
+				"DavidAnson.vscode-markdownlint",
+				"ms-vscode.makefile-tools"
+			]
+		}
+	},
+
+	"workspaceMount": "source=${localWorkspaceFolder},target=/go/src/github.com/cadamus/${localWorkspaceFolderBasename},type=bind",
+	"workspaceFolder": "/go/src/github.com/cadamus/${localWorkspaceFolderBasename}",	
+	"mounts": [
+		"source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.git,target=/home/vscode/.git,type=bind,consistency=cached",
+		"source=${localEnv:HOME}/.config/gh,target=/home/vscode/.config/gh,type=bind,consistency=cached"
+	]
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
