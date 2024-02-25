@@ -14,5 +14,6 @@ func Hello(name string) string {
 
 // Goodbye returns the infomous Lawrence Oates quote
 func Goodbye() string {
-	return "I am just going outside and I may be some time"
+	// return "I am just going outside and I may be some time"
+	return "This is not a goodbye, my darling, this is a thank you."
 }
